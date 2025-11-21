@@ -156,8 +156,8 @@ async function updateProjects() {
           ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
         </div>
         <div class="project-links">
-          ${project.githubLink ? `<a href="${project.githubLink}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>` : ''}
-          ${project.liveLink ? `<a href="${project.liveLink}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+          ${project.links?.github ? `<a href="${project.links.github}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>` : ''}
+          ${project.links?.live ? `<a href="${project.links.live}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
         </div>
       </div>
     </div>
