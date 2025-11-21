@@ -97,7 +97,18 @@ async function updateProfile() {
   const heroDescription = document.querySelector('.hero-description, #hero-desc');
   
   if (heroName) heroName.textContent = profile.name;
-  if (heroTitle) heroTitle.textContent = profile.title;
+  if (heroTitle) {
+    // Format title with waving hand and gradient
+    // Expected format: "👋 Hi, I'm Chirag Vaze" or similar
+    const titleText = profile.title || '';
+    const nameMatch = titleText.match(/(?:Hi,?\s*I'?m\s+)?(.+)/i);
+    const name = nameMatch ? nameMatch[1].trim() : profile.name;
+    
+    heroTitle.innerHTML = `
+      <span class="wave">👋</span>
+      Hi, I'm <span class="gradient-text typing-animation">${name}</span>
+    `;
+  }
   if (heroDescription) heroDescription.textContent = profile.heroDescription;
 
   // Update About Section
