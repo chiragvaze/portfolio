@@ -553,6 +553,76 @@ window.addEventListener('load', () => {
     }, 1500);
 });
 
+// ===== BACK TO TOP BUTTON =====
+const backToTopBtn = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 500) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// ===== CONTACT FORM =====
+const contactForm = document.querySelector('.contact-form');
+const formStatus = document.querySelector('.form-status');
+
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+        name: contactForm.querySelector('input[type="text"]').value,
+        email: contactForm.querySelector('input[type="email"]').value,
+        subject: contactForm.querySelectorAll('input[type="text"]')[1].value,
+        message: contactForm.querySelector('textarea').value
+    };
+    
+    // Show loading state
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    try {
+        // Using Formspree as example - replace with your actual form endpoint
+        // Alternative: Use EmailJS or your own backend
+        const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        if (response.ok) {
+            formStatus.className = 'form-status success';
+            formStatus.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+            contactForm.reset();
+        } else {
+            throw new Error('Failed to send message');
+        }
+    } catch (error) {
+        formStatus.className = 'form-status error';
+        formStatus.textContent = '✗ Oops! Something went wrong. Please try again or email me directly.';
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // Hide status message after 5 seconds
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 5000);
+    }
+});
+
 // ===== CONSOLE MESSAGE =====
 console.log('%c👋 Hey there, Developer!', 'color: #00ff88; font-size: 20px; font-weight: bold;');
 console.log('%cWelcome to my portfolio! 🚀', 'color: #0066ff; font-size: 16px;');
