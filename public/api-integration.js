@@ -152,16 +152,22 @@ async function updateProjects() {
       ? project.longDescription.split('\n').filter(line => line.trim().match(/^[✓\-•]/)).map(line => line.trim().replace(/^[✓\-•]\s*/, ''))
       : [];
 
+    // Get image URL - try image field first, then images array, then use a default
+    const imageUrl = project.image || 
+                     (project.images && project.images.length > 0 ? project.images[0].url : null);
+
     return `
     <div class="project-card" data-aos="fade-up" ${index > 0 ? `data-aos-delay="${index * 100}"` : ''}>
+      ${imageUrl ? `
       <div class="project-image">
-        <img src="${project.image || 'assets/projects/placeholder.jpg'}" alt="${project.title}" class="project-img" loading="lazy">
+        <img src="${imageUrl}" alt="${project.title}" class="project-img" loading="lazy">
         <div class="project-overlay">
           ${project.links?.github ? `<a href="${project.links.github}" target="_blank" class="project-link"><i class="fab fa-github"></i></a>` : ''}
           ${project.links?.live ? `<a href="${project.links.live}" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>` : ''}
         </div>
         <div class="project-bg"></div>
       </div>
+      ` : ''}
       <div class="project-content">
         <span class="project-type">${project.category || 'Web'}</span>
         <h3>${project.title}</h3>
