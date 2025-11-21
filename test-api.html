@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .info-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+        
+        .alert.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .alert.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Portfolio API Integration Test</h1>
+        <p class="subtitle">Test your backend API and verify all endpoints are working correctly</p>
+        
+        <div class="alert info">
+            <strong>ℹ️ Note:</strong> Make sure your backend server is running on <code>http://localhost:5000</code>
+        </div>
+        
+        <!-- Health Check -->
+        <div class="test-section">
+            <h2>1. Health Check <span id="health-status" class="status pending">Not Tested</span></h2>
+            <p>Verify the backend server is running and responding</p>
+            <button onclick="testHealth()">Test Health Endpoint</button>
+            <div id="health-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Profile -->
+        <div class="test-section">
+            <h2>2. Profile Data <span id="profile-status" class="status pending">Not Tested</span></h2>
+            <p>Fetch public profile information</p>
+            <button onclick="testProfile()">Test Profile Endpoint</button>
+            <div id="profile-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Projects -->
+        <div class="test-section">
+            <h2>3. Projects <span id="projects-status" class="status pending">Not Tested</span></h2>
+            <p>Fetch all public projects</p>
+            <button onclick="testProjects()">Test Projects Endpoint</button>
+            <div id="projects-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Experience -->
+        <div class="test-section">
+            <h2>4. Experience <span id="experience-status" class="status pending">Not Tested</span></h2>
+            <p>Fetch experience timeline data</p>
+            <button onclick="testExperience()">Test Experience Endpoint</button>
+            <div id="experience-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Certifications -->
+        <div class="test-section">
+            <h2>5. Certifications <span id="certs-status" class="status pending">Not Tested</span></h2>
+            <p>Fetch all certifications</p>
+            <button onclick="testCertifications()">Test Certifications Endpoint</button>
+            <div id="certs-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Contact Form -->
+        <div class="test-section">
+            <h2>6. Contact Form <span id="contact-status" class="status pending">Not Tested</span></h2>
+            <p>Test message submission</p>
+            <button onclick="testContactForm()">Test Contact Form</button>
+            <div id="contact-result" class="result" style="display:none;"></div>
+        </div>
+        
+        <!-- Test All -->
+        <div class="test-section" style="background: #667eea; border-left: none;">
+            <h2 style="color: white;">🚀 Run All Tests</h2>
+            <button style="background: white; color: #667eea;" onclick="testAll()">Run All Tests</button>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        
+        function updateStatus(id, success) {
+            const el = document.getElementById(id + '-status');
+            el.className = 'status ' + (success ? 'success' : 'error');
+            el.textContent = success ? '✅ Passed' : '❌ Failed';
+        }
+        
+        function showResult(id, data, error = null) {
+            const resultEl = document.getElementById(id + '-result');
+            resultEl.style.display = 'block';
+            
+            if (error) {
+                resultEl.innerHTML = `<pre style="color: #dc3545;">${error}</pre>`;
+            } else {
+                resultEl.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            }
+        }
+        
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                const data = await response.json();
+                
+                if (response.ok && data.status === 'ok') {
+                    updateStatus('health', true);
+                    showResult('health', data);
+                } else {
+                    throw new Error('Health check failed');
+                }
+            } catch (error) {
+                updateStatus('health', false);
+                showResult('health', null, error.message);
+            }
+        }
+        
+        async function testProfile() {
+            try {
+                const response = await fetch(`${API_URL}/profile/public`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('profile', true);
+                    showResult('profile', data);
+                } else {
+                    throw new Error(data.message || 'Failed to fetch profile');
+                }
+            } catch (error) {
+                updateStatus('profile', false);
+                showResult('profile', null, error.message);
+            }
+        }
+        
+        async function testProjects() {
+            try {
+                const response = await fetch(`${API_URL}/projects/public`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('projects', true);
+                    showResult('projects', {
+                        count: data.length,
+                        projects: data
+                    });
+                } else {
+                    throw new Error(data.message || 'Failed to fetch projects');
+                }
+            } catch (error) {
+                updateStatus('projects', false);
+                showResult('projects', null, error.message);
+            }
+        }
+        
+        async function testExperience() {
+            try {
+                const response = await fetch(`${API_URL}/experience/public`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('experience', true);
+                    showResult('experience', {
+                        count: data.length,
+                        experiences: data
+                    });
+                } else {
+                    throw new Error(data.message || 'Failed to fetch experience');
+                }
+            } catch (error) {
+                updateStatus('experience', false);
+                showResult('experience', null, error.message);
+            }
+        }
+        
+        async function testCertifications() {
+            try {
+                const response = await fetch(`${API_URL}/certifications/public`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('certs', true);
+                    showResult('certs', {
+                        count: data.length,
+                        certifications: data
+                    });
+                } else {
+                    throw new Error(data.message || 'Failed to fetch certifications');
+                }
+            } catch (error) {
+                updateStatus('certs', false);
+                showResult('certs', null, error.message);
+            }
+        }
+        
+        async function testContactForm() {
+            try {
+                const testMessage = {
+                    name: 'Test User',
+                    email: 'test@example.com',
+                    subject: 'API Test Message',
+                    message: 'This is a test message from the API integration tester.'
+                };
+                
+                const response = await fetch(`${API_URL}/messages`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testMessage)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    updateStatus('contact', true);
+                    showResult('contact', {
+                        message: 'Test message sent successfully!',
+                        data: data
+                    });
+                } else {
+                    throw new Error(data.message || 'Failed to send message');
+                }
+            } catch (error) {
+                updateStatus('contact', false);
+                showResult('contact', null, error.message);
+            }
+        }
+        
+        async function testAll() {
+            console.log('Running all tests...');
+            await testHealth();
+            await new Promise(r => setTimeout(r, 500));
+            await testProfile();
+            await new Promise(r => setTimeout(r, 500));
+            await testProjects();
+            await new Promise(r => setTimeout(r, 500));
+            await testExperience();
+            await new Promise(r => setTimeout(r, 500));
+            await testCertifications();
+            await new Promise(r => setTimeout(r, 500));
+            await testContactForm();
+            console.log('All tests completed!');
+        }
+    </script>
+</body>
+</html>
