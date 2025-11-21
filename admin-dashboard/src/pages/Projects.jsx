@@ -39,47 +39,36 @@ const Projects = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let projectData = { ...formData };
-      
-      // Upload image if selected
-      if (imageFile) {
-        const imageFormData = new FormData();
-        imageFormData.append('image', imageFile);
-        
-        const uploadResponse = await projectAPI.uploadImage(
-          editingProject?._id || 'temp',
-          imageFormData
-        );
-        
-        if (!editingProject) {
-          // For new project, create first then upload image
-          const createResponse = await projectAPI.create(formData);
-          const projectId = createResponse.data._id;
-          
-          const imageFormData2 = new FormData();
-          imageFormData2.append('image', imageFile);
-          await projectAPI.uploadImage(projectId, imageFormData2);
-          
-          toast.success('Project created with image!');
-          resetForm();
-          loadProjects();
-          return;
-        } else {
-          projectData.image = uploadResponse.data.url;
-        }
-      }
-      
       if (editingProject) {
-        await projectAPI.update(editingProject._id, projectData);
+        // Update existing project
+        await projectAPI.update(editingProject._id, formData);
+        
+        // Upload image if selected
+        if (imageFile) {
+          const imageFormData = new FormData();
+          imageFormData.append('image', imageFile);
+          await projectAPI.uploadImage(editingProject._id, imageFormData);
+        }
+        
         toast.success('Project updated!');
       } else {
-        await projectAPI.create(projectData);
+        // Create new project
+        const createResponse = await projectAPI.create(formData);
+        
+        // Upload image if selected
+        if (imageFile && createResponse.data._id) {
+          const imageFormData = new FormData();
+          imageFormData.append('image', imageFile);
+          await projectAPI.uploadImage(createResponse.data._id, imageFormData);
+        }
+        
         toast.success('Project created!');
       }
       
       resetForm();
       loadProjects();
     } catch (error) {
+      console.error('Error:', error);
       toast.error(error.response?.data?.message || 'Operation failed');
     }
   };

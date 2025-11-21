@@ -123,7 +123,12 @@ const uploadProjectImage = async (req, res) => {
       uploadStream.end(req.file.buffer);
     });
 
-    // Add image to project
+    // Set as main image if no image exists
+    if (!project.image) {
+      project.image = result.secure_url;
+    }
+
+    // Also add to images array
     project.images.push({
       url: result.secure_url,
       publicId: result.public_id,
@@ -134,6 +139,7 @@ const uploadProjectImage = async (req, res) => {
     
     res.json(project);
   } catch (error) {
+    console.error('Upload error:', error);
     res.status(500).json({ message: error.message });
   }
 };
