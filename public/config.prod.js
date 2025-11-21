@@ -1,5 +1,4 @@
 // Production API Configuration
 window.CONFIG = {
-  // Replace with your actual Render backend URL
-  API_URL: 'https://your-backend-url.onrender.com/api'
+  API_URL: 'https://portfolio-backend-67ee.onrender.com/api'
 };
