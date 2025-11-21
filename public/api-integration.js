@@ -146,22 +146,37 @@ async function updateProjects() {
   const projectsContainer = document.querySelector('.projects-grid, #projects-container');
   if (!projectsContainer) return;
 
-  projectsContainer.innerHTML = projects.map(project => `
-    <div class="project-card" data-aos="fade-up">
-      ${project.image ? `<img src="${project.image}" alt="${project.title}" class="project-image">` : ''}
+  projectsContainer.innerHTML = projects.map((project, index) => {
+    // Parse long description for features (lines starting with ✓, -, or •)
+    const features = project.longDescription 
+      ? project.longDescription.split('\n').filter(line => line.trim().match(/^[✓\-•]/)).map(line => line.trim().replace(/^[✓\-•]\s*/, ''))
+      : [];
+
+    return `
+    <div class="project-card" data-aos="fade-up" ${index > 0 ? `data-aos-delay="${index * 100}"` : ''}>
+      <div class="project-image">
+        <img src="${project.image || 'assets/projects/placeholder.jpg'}" alt="${project.title}" class="project-img" loading="lazy">
+        <div class="project-overlay">
+          ${project.links?.github ? `<a href="${project.links.github}" target="_blank" class="project-link"><i class="fab fa-github"></i></a>` : ''}
+          ${project.links?.live ? `<a href="${project.links.live}" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i></a>` : ''}
+        </div>
+        <div class="project-bg"></div>
+      </div>
       <div class="project-content">
+        <span class="project-type">${project.category || 'Web'}</span>
         <h3>${project.title}</h3>
         <p>${project.description}</p>
-        <div class="tech-stack">
-          ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-        </div>
-        <div class="project-links">
-          ${project.links?.github ? `<a href="${project.links.github}" target="_blank" rel="noopener"><i class="fab fa-github"></i> Code</a>` : ''}
-          ${project.links?.live ? `<a href="${project.links.live}" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''}
+        ${features.length > 0 ? `
+          <div class="project-features">
+            ${features.slice(0, 4).map(feature => `<span><i class="fas fa-check"></i> ${feature}</span>`).join('')}
+          </div>
+        ` : ''}
+        <div class="project-tech">
+          ${project.technologies.map(tech => `<span>${tech}</span>`).join('')}
         </div>
       </div>
     </div>
-  `).join('');
+  `}).join('');
 }
 
 // Update Experience Section
