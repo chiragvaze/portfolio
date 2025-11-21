@@ -128,6 +128,48 @@ const Profile = () => {
             </div>
           </div>
 
+          <div className="border-t pt-4">
+            <h3 className="font-semibold mb-3">Statistics (About Section)</h3>
+            <div className="grid grid-cols-3 gap-4">
+              <div>
+                <label className="label">Projects Completed</label>
+                <input
+                  type="number"
+                  className="input"
+                  value={profile?.stats?.projectsCompleted || 10}
+                  onChange={(e) => setProfile({
+                    ...profile,
+                    stats: { ...profile.stats, projectsCompleted: parseInt(e.target.value) || 0 }
+                  })}
+                />
+              </div>
+              <div>
+                <label className="label">Technologies</label>
+                <input
+                  type="number"
+                  className="input"
+                  value={profile?.stats?.technologies || 8}
+                  onChange={(e) => setProfile({
+                    ...profile,
+                    stats: { ...profile.stats, technologies: parseInt(e.target.value) || 0 }
+                  })}
+                />
+              </div>
+              <div>
+                <label className="label">Years Learning</label>
+                <input
+                  type="number"
+                  className="input"
+                  value={profile?.stats?.yearsLearning || 2}
+                  onChange={(e) => setProfile({
+                    ...profile,
+                    stats: { ...profile.stats, yearsLearning: parseInt(e.target.value) || 0 }
+                  })}
+                />
+              </div>
+            </div>
+          </div>
+
           <button type="submit" className="btn btn-primary">
             Save Changes
           </button>

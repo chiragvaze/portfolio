@@ -113,7 +113,42 @@ async function updateProfile() {
 
   // Update About Section
   const aboutText = document.querySelector('.about-text, #about-text');
-  if (aboutText) aboutText.textContent = profile.aboutText;
+  if (aboutText && profile.aboutText) {
+    // Highlight keywords: names and important terms in green/gradient
+    let formattedText = profile.aboutText;
+    
+    // Highlight name if it appears
+    if (profile.name) {
+      formattedText = formattedText.replace(
+        new RegExp(`\\b${profile.name}\\b`, 'gi'),
+        `<strong class="highlight-text">${profile.name}</strong>`
+      );
+    }
+    
+    // Highlight common important terms
+    const keywords = ['Information Technology', 'IT', 'Web Developer', 'Full Stack', 'Frontend', 'Backend', 'React', 'Node.js'];
+    keywords.forEach(keyword => {
+      const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+      formattedText = formattedText.replace(regex, `<strong class="highlight-text">$&</strong>`);
+    });
+    
+    aboutText.innerHTML = formattedText;
+  }
+
+  // Update Stats
+  if (profile.stats) {
+    const statCounters = document.querySelectorAll('.counter');
+    if (statCounters.length >= 3) {
+      statCounters[0].setAttribute('data-target', profile.stats.projectsCompleted || 10);
+      statCounters[0].textContent = profile.stats.projectsCompleted || 10;
+      
+      statCounters[1].setAttribute('data-target', profile.stats.technologies || 8);
+      statCounters[1].textContent = profile.stats.technologies || 8;
+      
+      statCounters[2].setAttribute('data-target', profile.stats.yearsLearning || 2);
+      statCounters[2].textContent = profile.stats.yearsLearning || 2;
+    }
+  }
 
   // Update Contact Info
   const emailLinks = document.querySelectorAll('a[href^="mailto:"]');

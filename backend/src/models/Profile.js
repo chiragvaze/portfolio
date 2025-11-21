@@ -57,17 +57,17 @@ const profileSchema = new mongoose.Schema({
   
   // Stats
   stats: {
-    experience: {
-      type: String,
-      default: '2+'
+    projectsCompleted: {
+      type: Number,
+      default: 10
     },
-    projects: {
-      type: String,
-      default: '15+'
+    technologies: {
+      type: Number,
+      default: 8
     },
-    clients: {
-      type: String,
-      default: '5+'
+    yearsLearning: {
+      type: Number,
+      default: 2
     }
   },
   
