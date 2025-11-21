@@ -3,11 +3,381 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <meta name="description" content="Chirag Vaze - IT Engineering Student & Web Developer Portfolio. Showcasing innovative projects and cutting-edge web development skills.">
+    <meta name="keywords" content="Chirag Vaze, Web Developer, IT Student, Portfolio, React, JavaScript, Full Stack Developer">
+    <meta name="author" content="Chirag Vaze">
+    <title>Chirag Vaze | IT Student & Web Developer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="src/index.js"></script>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="glitch" data-text="CV">CV</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="floating-shapes">
+                <div class="shape shape1"></div>
+                <div class="shape shape2"></div>
+                <div class="shape shape3"></div>
+            </div>
+            <h1 class="hero-title">
+                <span class="wave">👋</span>
+                Hi, I'm <span class="gradient-text typing-animation">Chirag Vaze</span>
+            </h1>
+            <p class="hero-subtitle">
+                <span class="roles"></span>
+            </p>
+            <p class="hero-description">
+                Second Year IT Engineering Student | Crafting Digital Experiences
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <span>View My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span>Get In Touch</span>
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <div class="social-links">
+                <a href="https://github.com/chiragvaze" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/chirag-vaze/" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.instagram.com/ccchirag_vaze/" target="_blank" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="mailto:chiragvaze.dev@gmail.com" class="social-icon">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll Down</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="number">01.</span> About Me
+            </h2>
+            <div class="about-content">
+                <div class="about-text" data-aos="fade-right">
+                    <p>
+                        Hello! I'm <strong>Chirag Vaze</strong>, a passionate second-year <strong>Information Technology</strong> student 
+                        with a deep love for web development and creating interactive digital experiences.
+                    </p>
+                    <p>
+                        I specialize in building modern, responsive web applications using cutting-edge technologies. 
+                        My journey in tech is driven by curiosity and the desire to solve real-world problems through code.
+                    </p>
+                    <p>
+                        When I'm not coding, you'll find me exploring new technologies, contributing to open-source, 
+                        or working on exciting personal projects that push the boundaries of what's possible on the web.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h3 class="counter" data-target="10">0</h3>
+                            <p>Projects Completed</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="counter" data-target="8">0</h3>
+                            <p>Technologies</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="counter" data-target="2">0</h3>
+                            <p>Years Learning</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="fade-left">
+                    <div class="image-container">
+                        <div class="rotating-border"></div>
+                        <div class="code-block">
+                            <pre><code>const chirag = {
+    role: "Web Developer",
+    year: "Second Year",
+    branch: "IT Engineering",
+    passion: "Building Cool Stuff",
+    status: "Always Learning"
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="number">02.</span> Skills & Technologies
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <h3>HTML5</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="90"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="150">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <h3>CSS3</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="85"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <h3>JavaScript</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="80"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="250">
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                    <h3>React</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="300">
+                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                    <h3>Node.js</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="70"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="350">
+                    <div class="skill-icon"><i class="fab fa-java"></i></div>
+                    <h3>Java</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="75"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="400">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <h3>SQL</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="70"></div>
+                    </div>
+                </div>
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="450">
+                    <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
+                    <h3>Git</h3>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-progress="80"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="number">03.</span> Featured Projects
+            </h2>
+            <div class="projects-grid">
+                <!-- Project 1: MovieTrack -->
+                <div class="project-card" data-aos="fade-up">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/chiragvaze" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                        <div class="project-bg"></div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">Full Stack</span>
+                        <h3>MovieTrack</h3>
+                        <p>A beautiful, full-stack movie tracking application with Netflix-inspired dark theme. Track movies you've watched, maintain a watchlist, rate movies, and discover new films.</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Hybrid API System (OMDb + TMDB)</span>
+                            <span><i class="fas fa-check"></i> Comprehensive Analytics</span>
+                            <span><i class="fas fa-check"></i> Smart Recommendations</span>
+                            <span><i class="fas fa-check"></i> Achievement System</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>React</span>
+                            <span>Node.js</span>
+                            <span>MongoDB</span>
+                            <span>API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Image Compressor -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/chiragvaze" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                        <div class="project-bg"></div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">Web Tool</span>
+                        <h3>Image Compressor</h3>
+                        <p>A lightweight, web-based image compression tool that allows users to compress multiple image formats while maintaining quality.</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Multiple Format Support</span>
+                            <span><i class="fas fa-check"></i> Quality Preservation</span>
+                            <span><i class="fas fa-check"></i> Batch Processing</span>
+                            <span><i class="fas fa-check"></i> No Server Upload</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>Canvas API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Medical Prescription Management -->
+                <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="https://github.com/chiragvaze" target="_blank" class="project-link">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                        <div class="project-bg"></div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-type">Team Project</span>
+                        <h3>Medical Prescription Management System</h3>
+                        <p>A comprehensive medical prescription management system built with Spring Boot, designed for doctors to manage patient prescriptions, medical history, and generate PDF prescriptions.</p>
+                        <div class="project-features">
+                            <span><i class="fas fa-check"></i> Patient Management</span>
+                            <span><i class="fas fa-check"></i> Prescription Generation</span>
+                            <span><i class="fas fa-check"></i> PDF Export</span>
+                            <span><i class="fas fa-check"></i> Medical History</span>
+                        </div>
+                        <div class="project-tech">
+                            <span>Spring Boot</span>
+                            <span>Java</span>
+                            <span>SQL</span>
+                            <span>PDF</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">
+                <span class="number">04.</span> Get In Touch
+            </h2>
+            <div class="contact-content" data-aos="fade-up">
+                <p class="contact-description">
+                    I'm currently looking for new opportunities and exciting projects to work on. 
+                    Whether you have a question or just want to say hi, feel free to reach out!
+                </p>
+                <div class="contact-methods">
+                    <a href="mailto:chiragvaze.dev@gmail.com" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Email</h3>
+                        <p>chiragvaze.dev@gmail.com</p>
+                    </a>
+                    <a href="https://github.com/chiragvaze" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <h3>GitHub</h3>
+                        <p>@chiragvaze</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/chirag-vaze/" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3>LinkedIn</h3>
+                        <p>Chirag Vaze</p>
+                    </a>
+                    <a href="https://www.instagram.com/ccchirag_vaze/" target="_blank" class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p>@ccchirag_vaze</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Chirag Vaze. Designed & Built with <span class="heart">❤️</span></p>
+            <div class="footer-links">
+                <a href="https://github.com/chiragvaze" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/chirag-vaze/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/ccchirag_vaze/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="script.js"></script>
 </body>
 </html>

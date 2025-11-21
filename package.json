@@ -1,26 +1,28 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
-  "description": "A personal portfolio website to showcase projects and skills.",
-  "main": "src/App.js",
+  "description": "Professional portfolio website showcasing projects and skills - Built with advanced animations and interactive features",
+  "main": "public/index.html",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "live-server public",
+    "build": "echo 'Build complete - Portfolio is ready for deployment!'",
+    "deploy": "gh-pages -d public"
   },
   "keywords": [
     "portfolio",
     "website",
-    "react"
+    "html",
+    "css",
+    "javascript",
+    "web-development",
+    "interactive",
+    "animations"
   ],
-  "author": "Your Name",
+  "author": "Chirag Vaze <chiragvaze.dev@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chiragvaze/portfolio.git"
   },
-  "devDependencies": {},
-  "homepage": "http://yourusername.github.io/portfolio-website"
+  "homepage": "https://chiragvaze.github.io/portfolio"
 }
