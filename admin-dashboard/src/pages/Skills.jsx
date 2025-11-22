@@ -49,6 +49,7 @@ const Skills = () => {
   };
 
   const handleDeleteSkill = async (index) => {
+    // eslint-disable-next-line no-restricted-globals
     if (!confirm('Delete this skill?')) return;
     
     try {
