@@ -181,12 +181,22 @@ async function updateProfile() {
   if (profile.skills && profile.skills.length > 0) {
     const skillsContainer = document.querySelector('.skills-grid, #skills-container');
     if (skillsContainer) {
-      skillsContainer.innerHTML = profile.skills.map(skill => `
-        <div class="skill-item" data-aos="fade-up">
-          <i class="fas fa-check-circle"></i>
-          <span>${skill}</span>
-        </div>
-      `).join('');
+      skillsContainer.innerHTML = profile.skills.map(skill => {
+        // Handle both string format and object format
+        const skillName = typeof skill === 'string' ? skill : skill.name;
+        const skillIcon = typeof skill === 'object' && skill.icon ? skill.icon : 'fa-code';
+        const skillProgress = typeof skill === 'object' && skill.proficiency ? skill.proficiency : 80;
+        
+        return `
+          <div class="skill-card" data-aos="flip-left">
+            <div class="skill-icon"><i class="fas ${skillIcon}"></i></div>
+            <h3>${skillName}</h3>
+            <div class="skill-bar">
+              <div class="skill-progress" data-progress="${skillProgress}" style="width: ${skillProgress}%"></div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
   }
 }
