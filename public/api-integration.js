@@ -114,25 +114,32 @@ async function updateProfile() {
   // Update About Section
   const aboutText = document.querySelector('.about-text, #about-text');
   if (aboutText && profile.aboutText) {
-    // Highlight keywords: names and important terms in green/gradient
-    let formattedText = profile.aboutText;
+    // Split into paragraphs by double line breaks or single line breaks
+    const paragraphs = profile.aboutText.split(/\n\n+|\n/).filter(p => p.trim());
     
-    // Highlight name if it appears
-    if (profile.name) {
-      formattedText = formattedText.replace(
-        new RegExp(`\\b${profile.name}\\b`, 'gi'),
-        `<strong class="highlight-text">${profile.name}</strong>`
-      );
-    }
-    
-    // Highlight common important terms
-    const keywords = ['Information Technology', 'IT', 'Web Developer', 'Full Stack', 'Frontend', 'Backend', 'React', 'Node.js'];
-    keywords.forEach(keyword => {
-      const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
-      formattedText = formattedText.replace(regex, `<strong class="highlight-text">$&</strong>`);
+    // Process each paragraph: highlight keywords
+    const formattedParagraphs = paragraphs.map(paragraph => {
+      let formatted = paragraph.trim();
+      
+      // Highlight name if it appears
+      if (profile.name) {
+        formatted = formatted.replace(
+          new RegExp(`\\b${profile.name}\\b`, 'gi'),
+          `<strong class="highlight-text">${profile.name}</strong>`
+        );
+      }
+      
+      // Highlight common important terms
+      const keywords = ['Information Technology', 'IT', 'Web Developer', 'Full Stack', 'Frontend', 'Backend', 'React', 'Node.js'];
+      keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
+        formatted = formatted.replace(regex, `<strong class="highlight-text">$&</strong>`);
+      });
+      
+      return `<p>${formatted}</p>`;
     });
     
-    aboutText.innerHTML = formattedText;
+    aboutText.innerHTML = formattedParagraphs.join('');
   }
 
   // Update Stats
