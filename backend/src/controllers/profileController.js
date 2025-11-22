@@ -75,6 +75,46 @@ const uploadProfileImage = async (req, res) => {
   }
 };
 
+// @desc    Upload resume
+// @route   POST /api/profile/resume
+// @access  Private
+const uploadResume = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    // Upload to Cloudinary
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { 
+          folder: 'portfolio/resume',
+          resource_type: 'raw', // For non-image files like PDF
+          format: 'pdf'
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      uploadStream.end(req.file.buffer);
+    });
+
+    // Update profile with resume URL
+    const profile = await Profile.findOne();
+    profile.resumeUrl = result.secure_url;
+    await profile.save();
+
+    res.json({
+      resumeUrl: result.secure_url,
+      publicId: result.public_id
+    });
+  } catch (error) {
+    console.error('Resume upload error:', error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // @desc    Add skill
 // @route   POST /api/profile/skills
 // @access  Private
@@ -132,6 +172,7 @@ module.exports = {
   getProfile,
   updateProfile,
   uploadProfileImage,
+  uploadResume,
   addSkill,
   updateSkill,
   deleteSkill

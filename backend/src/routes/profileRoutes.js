@@ -4,6 +4,7 @@ const {
   getProfile,
   updateProfile,
   uploadProfileImage,
+  uploadResume,
   addSkill,
   updateSkill,
   deleteSkill
@@ -19,6 +20,7 @@ router.route('/')
   .put(protect, updateProfile);
 
 router.post('/upload-image', protect, upload.single('image'), uploadProfileImage);
+router.post('/resume', protect, upload.single('resume'), uploadResume);
 
 router.route('/skills')
   .post(protect, addSkill);

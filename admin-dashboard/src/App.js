@@ -10,6 +10,7 @@ import Messages from './pages/Messages';
 import Profile from './pages/Profile';
 import Experience from './pages/Experience';
 import Certifications from './pages/Certifications';
+import Skills from './pages/Skills';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -36,6 +37,7 @@ function App() {
             <Route path="projects" element={<Projects />} />
             <Route path="experience" element={<Experience />} />
             <Route path="certifications" element={<Certifications />} />
+            <Route path="skills" element={<Skills />} />
             <Route path="messages" element={<Messages />} />
             <Route path="profile" element={<Profile />} />
           </Route>

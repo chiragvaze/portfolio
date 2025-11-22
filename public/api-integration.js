@@ -177,6 +177,21 @@ async function updateProfile() {
     }
   }
 
+  // Update Resume Download Button
+  const resumeBtn = document.getElementById('resume-download-btn');
+  if (resumeBtn) {
+    if (profile.resumeUrl) {
+      resumeBtn.href = profile.resumeUrl;
+      resumeBtn.setAttribute('download', 'Resume.pdf');
+      resumeBtn.setAttribute('target', '_blank');
+    } else {
+      resumeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.location.href = '/404.html';
+      });
+    }
+  }
+
   // Update Skills
   if (profile.skills && profile.skills.length > 0) {
     const skillsContainer = document.querySelector('.skills-grid, #skills-container');

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [resumeFile, setResumeFile] = useState(null);
 
   useEffect(() => {
     loadProfile();
@@ -24,9 +25,35 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Update profile data first
       await profileAPI.update(profile);
-      toast.success('Profile updated!');
+      
+      // Upload resume if selected
+      if (resumeFile) {
+        const formData = new FormData();
+        formData.append('resume', resumeFile);
+        
+        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/profile/resume`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: formData
+        });
+        
+        if (!response.ok) throw new Error('Resume upload failed');
+        
+        const data = await response.json();
+        setProfile({ ...profile, resumeUrl: data.resumeUrl });
+        setResumeFile(null);
+        toast.success('Profile and resume updated!');
+      } else {
+        toast.success('Profile updated!');
+      }
+      
+      loadProfile(); // Reload to get updated data
     } catch (error) {
+      console.error('Update error:', error);
       toast.error('Update failed');
     }
   };
@@ -167,6 +194,29 @@ const Profile = () => {
                   })}
                 />
               </div>
+            </div>
+          </div>
+
+          <div className="border-t pt-4">
+            <h3 className="font-semibold mb-3">Resume Upload</h3>
+            <div>
+              <label className="label">Upload Resume (PDF)</label>
+              <input
+                type="file"
+                accept=".pdf"
+                className="input"
+                onChange={(e) => setResumeFile(e.target.files[0])}
+              />
+              {profile?.resumeUrl && (
+                <p className="text-sm text-gray-600 mt-2">
+                  Current resume: <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">View Resume</a>
+                </p>
+              )}
+              {resumeFile && (
+                <p className="text-sm text-green-600 mt-2">
+                  Ready to upload: {resumeFile.name}
+                </p>
+              )}
             </div>
           </div>
 

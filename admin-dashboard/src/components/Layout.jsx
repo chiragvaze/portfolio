@@ -8,6 +8,7 @@ import {
   User,
   Briefcase,
   Award,
+  Code,
   LogOut,
   Menu,
   X
@@ -28,6 +29,7 @@ const Layout = () => {
     { path: '/projects', label: 'Projects', icon: FolderKanban },
     { path: '/experience', label: 'Experience', icon: Briefcase },
     { path: '/certifications', label: 'Certifications', icon: Award },
+    { path: '/skills', label: 'Skills', icon: Code },
     { path: '/messages', label: 'Messages', icon: Mail },
     { path: '/profile', label: 'Profile', icon: User },
   ];
