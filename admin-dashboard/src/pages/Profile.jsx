@@ -33,7 +33,8 @@ const Profile = () => {
         const formData = new FormData();
         formData.append('resume', resumeFile);
         
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/profile/resume`, {
+        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+        const response = await fetch(`${API_URL}/profile/resume`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`
