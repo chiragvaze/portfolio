@@ -13,13 +13,39 @@ const Projects = () => {
     description: '',
     longDescription: '',
     technologies: [],
-    category: 'web',
+    category: 'Web Application',
     status: 'completed',
     featured: false,
     links: { live: '', github: '' },
     image: ''
   });
   const [imageFile, setImageFile] = useState(null);
+  const [customCategory, setCustomCategory] = useState('');
+
+  const categoryOptions = [
+    'Web Application',
+    'Mobile App',
+    'Desktop Application',
+    'E-commerce Platform',
+    'Social Media App',
+    'CMS / Blog Platform',
+    'Dashboard / Analytics',
+    'API / Backend Service',
+    'Machine Learning / AI',
+    'Game Development',
+    'Chrome Extension',
+    'CLI Tool',
+    'Library / Framework',
+    'DevOps / Automation',
+    'Blockchain / Web3',
+    'IoT Application',
+    'Data Visualization',
+    'Real-time Chat App',
+    'Video Streaming Platform',
+    'Educational Platform',
+    'Portfolio / Personal Website',
+    'Other'
+  ];
 
   useEffect(() => {
     loadProjects();
@@ -190,14 +216,34 @@ const Projects = () => {
                 <label className="label">Category</label>
                 <select
                   className="input"
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  value={formData.category === 'Other' || !categoryOptions.includes(formData.category) ? 'Other' : formData.category}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === 'Other') {
+                      setCustomCategory('');
+                      setFormData({ ...formData, category: '' });
+                    } else {
+                      setFormData({ ...formData, category: value });
+                      setCustomCategory('');
+                    }
+                  }}
                 >
-                  <option value="web">Web Application</option>
-                  <option value="mobile">Mobile App</option>
-                  <option value="desktop">Desktop App</option>
-                  <option value="tool">Tool/Utility</option>
+                  {categoryOptions.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
                 </select>
+                {(formData.category === '' || (formData.category !== '' && !categoryOptions.includes(formData.category))) && (
+                  <input
+                    type="text"
+                    className="input mt-2"
+                    placeholder="Enter custom category..."
+                    value={customCategory || formData.category}
+                    onChange={(e) => {
+                      setCustomCategory(e.target.value);
+                      setFormData({ ...formData, category: e.target.value });
+                    }}
+                  />
+                )}
               </div>
               <div>
                 <label className="label">Status</label>
