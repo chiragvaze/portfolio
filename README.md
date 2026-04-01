@@ -4,6 +4,7 @@
 
 ![Status](https://img.shields.io/badge/Status-Live-success?style=for-the-badge)
 ![Domain](https://img.shields.io/badge/Domain-chiragvaze.in-blue?style=for-the-badge)
+![Visitors](https://komarev.com/ghpvc/?username=chiragvaze&label=Profile%20Views&color=0e75b6&style=for-the-badge)
 ![Made With](https://img.shields.io/badge/Made%20With-HTML%2C%20CSS%2C%20JS-orange?style=for-the-badge)
 
 ---
